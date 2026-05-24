@@ -1,0 +1,523 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ExamPanic AI Chat 🚀</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:
+radial-gradient(circle at top left,#38bdf830,transparent 25%),
+radial-gradient(circle at bottom right,#6366f130,transparent 25%),
+#020617;
+
+min-height:100vh;
+color:white;
+overflow-x:hidden;
+}
+
+/* NAV */
+
+.nav{
+
+width:100%;
+padding:22px 7%;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+background:rgba(255,255,255,0.05);
+
+backdrop-filter:blur(20px);
+
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+
+font-size:28px;
+font-weight:700;
+color:#38bdf8;
+}
+
+.nav-btn{
+
+padding:12px 22px;
+
+border:none;
+border-radius:14px;
+
+background:linear-gradient(45deg,#38bdf8,#6366f1);
+
+color:white;
+font-weight:600;
+
+cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+
+width:90%;
+max-width:1400px;
+
+margin:auto;
+margin-top:35px;
+
+padding:45px;
+
+border-radius:30px;
+
+background:rgba(255,255,255,0.05);
+
+border:1px solid rgba(255,255,255,0.08);
+
+backdrop-filter:blur(25px);
+
+box-shadow:0 0 40px rgba(56,189,248,0.15);
+}
+
+.hero h1{
+
+font-size:55px;
+line-height:1.3;
+}
+
+.hero span{
+color:#38bdf8;
+}
+
+.hero p{
+
+margin-top:18px;
+opacity:0.85;
+line-height:1.9;
+max-width:850px;
+}
+
+/* MAIN */
+
+.main{
+
+width:90%;
+max-width:1400px;
+
+margin:auto;
+margin-top:30px;
+
+display:grid;
+grid-template-columns:350px 1fr;
+gap:25px;
+}
+
+/* CARD */
+
+.card{
+
+background:rgba(255,255,255,0.05);
+
+padding:25px;
+
+border-radius:25px;
+
+border:1px solid rgba(255,255,255,0.08);
+
+backdrop-filter:blur(20px);
+}
+
+/* INPUT */
+
+textarea{
+
+width:100%;
+height:180px;
+
+padding:16px;
+
+margin-top:15px;
+
+border:none;
+outline:none;
+
+border-radius:18px;
+
+background:#111827;
+
+color:white;
+
+font-size:15px;
+
+resize:none;
+}
+
+/* BUTTON */
+
+.ask-btn{
+
+width:100%;
+
+padding:15px;
+
+margin-top:18px;
+
+border:none;
+
+border-radius:16px;
+
+background:linear-gradient(45deg,#38bdf8,#6366f1);
+
+color:white;
+
+font-size:16px;
+font-weight:700;
+
+cursor:pointer;
+
+transition:0.3s;
+}
+
+.ask-btn:hover{
+
+transform:scale(1.02);
+
+box-shadow:0 0 30px rgba(99,102,241,0.4);
+}
+
+/* QUICK */
+
+.quick{
+
+margin-top:15px;
+
+padding:14px;
+
+background:#111827;
+
+border-radius:14px;
+
+cursor:pointer;
+
+transition:0.3s;
+
+border-left:4px solid #38bdf8;
+}
+
+.quick:hover{
+
+transform:translateX(5px);
+
+background:#1e293b;
+}
+
+/* CHAT OUTPUT */
+
+.chat-box{
+
+background:#0f172a;
+
+padding:25px;
+
+border-radius:22px;
+
+min-height:650px;
+
+border:1px solid rgba(255,255,255,0.06);
+
+overflow:auto;
+
+line-height:1.9;
+}
+
+.chat-box h1,
+.chat-box h2,
+.chat-box h3{
+
+color:#38bdf8;
+margin-top:18px;
+}
+
+.message{
+
+margin-top:18px;
+
+padding:18px;
+
+border-radius:18px;
+
+background:#111827;
+
+border:1px solid rgba(255,255,255,0.05);
+}
+
+.user{
+
+border-left:4px solid #38bdf8;
+}
+
+.ai{
+
+border-left:4px solid #6366f1;
+}
+
+/* LOADER */
+
+.loader{
+
+display:none;
+
+color:#38bdf8;
+font-weight:600;
+
+margin-bottom:12px;
+}
+
+/* MOBILE */
+
+@media(max-width:1000px){
+
+.main{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:38px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+
+<div class="nav">
+
+<div class="logo">
+🚀 ExamPanic AI Chat
+</div>
+
+<button class="nav-btn">
+AI Doubt Solver
+</button>
+
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+
+<h1>
+Your Personal <span>AI Doubt Solver</span> 💬
+</h1>
+
+<p>
+Ask any ICSE doubt and get smart AI explanations,
+examples, revision tips and interactive learning instantly.
+</p>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<!-- LEFT -->
+
+<div class="card">
+
+<h2 style="color:#38bdf8;">
+💬 Ask Doubt
+</h2>
+
+<textarea
+id="question"
+placeholder="Ask any doubt here..."
+></textarea>
+
+<button
+class="ask-btn"
+onclick="askAI()"
+>
+⚡ Ask ExamPanic AI
+</button>
+
+<div
+class="quick"
+onclick="quickQuestion('Explain Newton Laws simply')"
+>
+🚀 Explain Newton Laws simply
+</div>
+
+<div
+class="quick"
+onclick="quickQuestion('What is photosynthesis?')"
+>
+🌿 What is photosynthesis?
+</div>
+
+<div
+class="quick"
+onclick="quickQuestion('Difference between speed and velocity')"
+>
+📘 Difference between speed and velocity
+</div>
+
+<div
+class="quick"
+onclick="quickQuestion('Explain algebra basics')"
+>
+🧠 Explain algebra basics
+</div>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="card">
+
+<h2 style="color:#38bdf8;margin-bottom:15px;">
+🤖 AI Chat Output
+</h2>
+
+<div class="loader" id="loader">
+⚡ AI is thinking...
+</div>
+
+<div class="chat-box" id="chatBox">
+
+<div class="message ai">
+Welcome to ExamPanic AI 🚀<br><br>
+
+Ask any study doubt to start learning.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const API =
+"https://student-learning-system-r6bi.onrender.com";
+
+/* ASK AI */
+
+async function askAI(){
+
+let question =
+document.getElementById("question").value;
+
+if(!question){
+
+alert("Please ask something");
+return;
+
+}
+
+let chatBox =
+document.getElementById("chatBox");
+
+chatBox.innerHTML += `
+
+<div class="message user">
+<b>🧑 You:</b><br><br>
+${question}
+</div>
+
+`;
+
+document.getElementById("loader").style.display =
+"block";
+
+document.getElementById("question").value = "";
+
+try{
+
+let res = await fetch(API + "/chat",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+message:question
+})
+
+});
+
+let data = await res.json();
+
+chatBox.innerHTML += `
+
+<div class="message ai">
+
+<b>🤖 ExamPanic AI:</b><br><br>
+
+${marked.parse(
+data.reply || "No response"
+)}
+
+</div>
+
+`;
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
+}
+
+catch(err){
+
+chatBox.innerHTML += `
+
+<div class="message ai">
+
+❌ Backend Error
+
+</div>
+
+`;
+
+}
+
+document.getElementById("loader").style.display =
+"none";
+}
+
+/* QUICK QUESTION */
+
+function quickQuestion(text){
+
+document.getElementById("question").value = text;
+
+}
+
+</script>
+
+</body>
+</html>
